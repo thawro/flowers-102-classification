@@ -1,0 +1,7 @@
+python-multipart
+torch==2.0.1
+fastapi
+Pillow
+numpy
+uvicorn
+gradio

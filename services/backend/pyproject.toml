@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "flowers-species-classification"
+version = "0.1.0"
+description = ""
+authors = ["shate <tomaszhawro.kontakt@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = { version = "2.0.1+cu117", source = "torchcu117" }
+plotly = "^5.14.0"
+wandb = "^0.14.0"
+pre-commit = "^3.2.2"
+black = "^23.3.0"
+blacken-docs = "^1.13.0"
+isort = "^5.12.0"
+ipykernel = "^6.22.0"
+torchinfo = "^1.7.2"
+pytorch-lightning = "^2.0.0"
+torchvision = "^0.15.2"
+pandas = "^2.0.1"
+scipy = "1.9.2"
+rich = "^13.3.5"
+fastapi = "^0.95.1"
+uvicorn = {extras = ["standard"], version = "^0.22.0"}
+matplotlib = "^3.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[[tool.poetry.source]]
+name = "torchcu117"
+url = "https://download.pytorch.org/whl/cu117"
+default = false
+secondary = true
