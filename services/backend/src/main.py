@@ -21,7 +21,7 @@ app.add_middleware(
 
 model_path = "model/model.pt"
 transform_path = "model/transform.pt"
-mapping_path = "model/mapping.json"
+mapping_path = "model/mapping.txt"
 
 model = torch.jit.load(model_path)
 model.eval()
@@ -29,9 +29,10 @@ model.to("cpu")
 transform = torch.jit.load(transform_path)
 
 
-with open(mapping_path, "rb") as f:
-    label2idx = json.load(f)
-LABELS = list(label2idx.keys())
+with open(mapping_path) as f:
+    labels = f.readlines()
+    labels = [label.strip() for label in labels]
+    idx2label = {i: label for i, label in enumerate(labels)}
 
 
 def load_image_into_numpy_array(data):
@@ -45,8 +46,8 @@ async def predict(file: UploadFile = File(...)):
     img = transform(img).unsqueeze(0)
     log_probs = model(img)[0]
     probs = torch.exp(log_probs)
-    label_probs = {LABELS[i]: float(probs[i]) for i in range(len(LABELS))}
-    return label_probs
+    confidences = {idx2label[i]: float(probs[i]) for i in range(len(idx2label))}
+    return confidences
 
 
 @app.get("/")

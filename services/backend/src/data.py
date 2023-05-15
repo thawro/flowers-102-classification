@@ -41,7 +41,7 @@ class FlowersDataset(torchvision.datasets.Flowers102):
             self.idx2label = {i: label for i, label in enumerate(labels)}
 
         self._named_labels = np.array([self.idx2label[target] for target in self._labels])
-        self.classes = list(label2idx.keys())
+        self.classes = list(self.idx2label.values())
 
     def get_raw_img(self, idx: int):
         image_file = self._image_files[idx]

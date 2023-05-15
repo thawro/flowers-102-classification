@@ -6,6 +6,7 @@ import torch
 from torch import nn
 from collections import OrderedDict
 from src.architectures.deep_cnn import CNNBlock
+from src.architectures.base import Backbone
 
 
 class FireBlock(nn.Module):
@@ -38,7 +39,7 @@ class FireBlock(nn.Module):
         return out
 
 
-class SqueezeNet(nn.Module):
+class SqueezeNet1_0(nn.Module):
     def __init__(
         self,
         in_channels: int = 3,
@@ -101,3 +102,28 @@ class SqueezeNet(nn.Module):
     @property
     def name(self):
         return "SqueezeNet"
+
+
+from typing import Literal
+
+
+class SqueezeNet:
+    def __new__(
+        cls,
+        in_channels: int,
+        version: Literal["squeezenet1_0", "squeezenet1_1"],
+        load_from_torch: bool = False,
+        pretrained: bool = False,
+        freeze_extractor: bool = False,
+    ):
+        if load_from_torch:
+            _net = torch.hub.load("pytorch/vision:v0.10.0", version, pretrained=pretrained)
+            _net.classifier[0] = torch.nn.Identity()
+            _net.classifier[1] = torch.nn.Identity()
+            _net.classifier[2] = torch.nn.Identity()
+            net = Backbone(_net, out_channels=512, name=version)
+            if freeze_extractor:
+                net.freeze()
+        else:
+            net = SqueezeNet1_0(in_channels=in_channels)
+        return net

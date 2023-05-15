@@ -136,14 +136,20 @@ def load_net(num_classes: int) -> nn.Module:
     #     pool_kernels=[2, 1, 2, 1, 2],
     # )
 
-    # backbone = SqueezeNet()
-    backbone = ResNet(
+    backbone = SqueezeNet(
         in_channels=3,
-        version="resnet18",
+        version="squeezenet1_0",
         load_from_torch=True,
         pretrained=True,
         freeze_extractor=True,
     )
+    # backbone = ResNet(
+    #     in_channels=3,
+    #     version="resnet18",
+    #     load_from_torch=True,
+    #     pretrained=True,
+    #     freeze_extractor=True,
+    # )
 
     return nn.Sequential(
         backbone,
