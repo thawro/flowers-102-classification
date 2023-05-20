@@ -22,3 +22,4 @@ make train_model
 ```bat
 docker build -t flowers .
 docker run -it -p 7860:7860 --name flowers_app flowers
+```
