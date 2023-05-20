@@ -47,5 +47,5 @@ docker run -it -p 7860:7860 --name flowers_app flowers
 ```bash
 docker-compose up --build
 ```
-2. Open `http://0.0.0.0:5000/docs` in your browser to see possible FastAPI endpoints
-3. Open `http://0.0.0.0:3000` in your browser to see ReactJS frontend
+2. Open http://0.0.0.0:5000/docs in your browser to see possible FastAPI endpoints
+3. Open http://0.0.0.0:3000 in your browser to see ReactJS frontend
