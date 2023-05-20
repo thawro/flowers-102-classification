@@ -15,11 +15,12 @@ Image classification model trained using PyTorch Lightning framework and shared 
 
 ## Commands 
 1. Train the model:
-```bat
+```bash
 make train_model
 ```
 2. Run docker with gradio app:
-```bat
+```bash
 docker build -t flowers .
+
 docker run -it -p 7860:7860 --name flowers_app flowers
 ```
