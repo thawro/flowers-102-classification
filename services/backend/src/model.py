@@ -129,13 +129,6 @@ class FlowersModule(pl.LightningModule):
 
 
 def load_net(num_classes: int) -> nn.Module:
-    # backbone = DeepCNN(
-    #     in_channels=3,
-    #     out_channels=[16, 32, 64, 128, 256],
-    #     kernels=[3, 3, 3, 3, 3],
-    #     pool_kernels=[2, 1, 2, 1, 2],
-    # )
-
     backbone = SqueezeNet(
         in_channels=3,
         version="squeezenet1_0",
@@ -143,19 +136,9 @@ def load_net(num_classes: int) -> nn.Module:
         pretrained=True,
         freeze_extractor=True,
     )
-    # backbone = ResNet(
-    #     in_channels=3,
-    #     version="resnet18",
-    #     load_from_torch=True,
-    #     pretrained=True,
-    #     freeze_extractor=True,
-    # )
 
     return nn.Sequential(
         backbone,
-        # nn.Conv2d(backbone.out_channels, num_classes, kernel_size=1),
-        # nn.AdaptiveAvgPool2d((1, 1)),
-        # nn.Flatten(1, -1),
         nn.Linear(backbone.out_channels, num_classes),
         nn.LogSoftmax(dim=1),
     )

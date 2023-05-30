@@ -7,9 +7,9 @@ colorTo: green
 ---
 # About
 Image classification model trained using PyTorch Lightning framework and shared on Hugging Face with the use of gradio and Docker. 
-* Architecture: simple Deep Convolutional Neural Network (DeepCNN)
+* Task: Classification of flowers images into one of 102 categories
 * Dataset: [102 Category Flower Dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html)
-* Experiments: all experiments are logged to the WandB project which can be found [here](https://wandb.ai/thawro/flowers-classification?workspace=user-thawro)
+* Architecture: [SqueezeNet](https://arxiv.org/abs/1602.07360), loaded pretrained ImageNet weights and finetuned on [102 Category Flower Dataset](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html) 
 
 ## Tech stack
 * [PyTorch](https://pytorch.org/) - neural networks architectures and datasets classes

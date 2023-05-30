@@ -4,4 +4,4 @@ fastapi
 Pillow
 numpy
 uvicorn
-gradio
+gradio==3.30.0
